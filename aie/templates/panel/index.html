@@ -1,0 +1,329 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>panel</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+    <script src="https://cdnjs.com/libraries/Chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+</head>
+<body>
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#!" class="brand-logo">Dashboard</a>
+            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <ul class="right hide-on-med-and-down">
+                <li><a href='{% url "contact" %}'>Contact us</a></li>
+                <li><a href='{% url "home" %}'>Dashboard</a></li>
+                <li><a href='{% url "notifications" %}'>Notifications</a></li>
+                <li><a href='{% url "logout" %}'>Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <ul class="sidenav" id="mobile-demo">
+      <li><a href='{% url "home" %}'>Dashboard</a></li>
+      <li><a href='{% url "notifications" %}'>Notifications</a></li>
+      <li><a href='{% url "contact" %}'>Contact us</a></li>
+      <li><a href='{% url "logout" %}'>Logout</a></li>  
+    </ul>
+
+	<div>	
+		<div class="row">
+		    <div class="col s12 m3">
+		      <div class="card teal lighten-2">
+		        <div class="card-content white-text">
+		          <span class="card-title">Total Usage Today</span>
+		          <p>{{today_usage}}</p>
+		        </div>
+		      </div>
+		    </div>
+		    <div class="col s12 m3">
+		      <div class="card #42a5f5 blue lighten-1">
+		        <div class="card-content white-text">
+		          <span class="card-title">Total Cost Today</span>
+		          <p>{{today_cost}} T</p>
+		        </div>
+		      </div>
+		    </div>
+		    <div class="col s12 m3">
+		      <div class="card #b71c1c red darken-4">
+		        <div class="card-content white-text">
+		          <span class="card-title">Avarage Usage This Week</span>
+		          <p>{{this_week_average}}</p>
+		        </div>
+		      </div>
+		    </div>
+		    <div class="col s12 m3">
+		      <div class="card #8bc34a light-green">
+		        <div class="card-content white-text">
+		          <span class="card-title">Avarage Cost This Week</span>
+		          <p>{{this_week_cost}} T</p>
+		        </div>
+		      </div>
+		    </div>
+		</div>
+
+
+        <div class="row">
+            <div class="col s12 m6">
+                <canvas id="myLineChart"></canvas>
+            </div>
+            <div class="col s12 m6">
+                <div class="card deep-purple accent-1">
+                    <div class="card-content white-text">
+                      <span class="card-title">
+                          What does this chart show?
+                      </span>
+                      <p></p>
+                    </div>
+              </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col s12 m6">
+                <canvas id="myWeeklyBarChart"></canvas>
+            </div>
+            <div class="col s12 m6">
+                <div class="card orange darken-3">
+                    <div class="card-content white-text">
+                      <span class="card-title">
+                          What does this chart show?
+                      </span>
+                      <p></p>
+                    </div>
+              </div>
+            </div>
+        </div>
+
+		<div class="row">
+			<div class="col s12 m6 l4">
+				<div class="card">
+			        <div class="card-image">
+			          <img src='{% static "img/1.jpg" %}'>
+			        </div>
+			        <div class="card-content">
+			          <p>some stat</p>
+			        </div>
+		      	</div>
+			</div>
+			<div class="col s12 m6 l4">
+				<div class="card">
+			        <div class="card-image">
+			          <img src='{% static "img/2.jpg" %}'>
+			        </div>
+			        <div class="card-content">
+			          <p>some stat</p>
+			        </div>
+		      	</div>
+			</div>
+            <div class="col s12 m6 l4">
+                <div class="card">
+                    <div class="card-image">
+                      <img src='{% static "img/3.jpg" %}'>
+                    </div>
+                    <div class="card-content">
+                      <p>some stat</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m6 l12">
+                <div class="card">
+                    <div class="card-image">
+                      <img src='{% static "img/4.jpg" %}'>
+                    </div>
+                    <div class="card-content">
+                      <p>some stat</p>
+                    </div>
+                </div>
+            </div>
+		</div>
+
+        <!-- <div class="row">
+            <div class="col s12 m6">
+                <canvas id="myBubbleChart"></canvas>
+            </div>
+            <div class="col s12 m6">
+                <div class="card brown darken-1">
+                    <div class="card-content white-text">
+                      <span class="card-title">
+                          What does this chart show?
+                      </span>
+                      <p></p>
+                    </div>
+              </div>
+            </div>
+        </div> -->
+
+
+	</div>
+	
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script>
+   document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.sidenav');
+    var instances = M.Sidenav.init(elems);
+  }); 
+</script>
+<script>
+    
+    
+
+
+    var endpint = 'api/all/data';
+    $.ajax({
+        method: "GET", 
+        url: endpint, 
+        success: function(line_chart_data){
+            line_chart_data = JSON.parse(line_chart_data);
+             var ctx1 = document.getElementById("myLineChart").getContext('2d');
+            var myLineChart = new Chart(ctx1, {
+                type: 'line',
+                data:{
+                    labels:line_chart_data.dates,
+                    datasets: [{  
+                        data: line_chart_data.values,
+                        // data: [1, 2],
+                        label: "All Usage", 
+                        borderColor: "#8e5ea2", 
+                        fill: false
+                    }]
+                }
+            });
+        }, 
+        error: function(error_data){
+            console.log("error")
+            console.log(error_data)
+        }
+    });
+
+
+    var endpint = 'api/week/data';
+    $.ajax({
+        method: "GET", 
+        url: endpint, 
+        success: function(weekly_bar_chart){
+            weekly_bar_chart = JSON.parse(weekly_bar_chart);
+            console.log(weekly_bar_chart)
+            var ctx2 = document.getElementById("myWeeklyBarChart").getContext('2d');
+            var myWeeklyBarChart = new Chart(ctx2, {
+                type: 'bar',
+                data: {
+                    labels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+                    datasets: [{
+                        label: 'this weeks usage',
+                        data: weekly_bar_chart.values,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)', 
+                            'rgba(23, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255,99,132,1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)', 
+                            'rgba(23, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero:true
+                            }
+                        }]
+                    }
+                }
+            });
+        }, 
+        error: function(error_data){
+            console.log("error")
+            console.log(error_data)
+        }
+    });
+
+
+    new Chart(document.getElementById("myBubbleChart"), {
+        type: 'bubble',
+        data: {
+          labels: "Africa",
+          datasets: [
+            {
+              label: ["China"],
+              backgroundColor: "rgba(255,221,50,0.2)",
+              borderColor: "rgba(255,221,50,1)",
+              data: [{
+                x: 21269017,
+                y: 5.245,
+                r: 15
+              }]
+            }, {
+              label: ["Denmark"],
+              backgroundColor: "rgba(60,186,159,0.2)",
+              borderColor: "rgba(60,186,159,1)",
+              data: [{
+                x: 258702,
+                y: 7.526,
+                r: 10
+              }]
+            }, {
+              label: ["Germany"],
+              backgroundColor: "rgba(0,0,0,0.2)",
+              borderColor: "#000",
+              data: [{
+                x: 3979083,
+                y: 6.994,
+                r: 15
+              }]
+            }, {
+              label: ["Japan"],
+              backgroundColor: "rgba(193,46,12,0.2)",
+              borderColor: "rgba(193,46,12,1)",
+              data: [{
+                x: 4931877,
+                y: 5.921,
+                r: 15
+              }]
+            }
+          ]
+        },
+        options: {
+          title: {
+            display: true,
+            text: 'Predicted world population (millions) in 2050'
+          }, scales: {
+            yAxes: [{ 
+              scaleLabel: {
+                display: true,
+                labelString: "Happiness"
+              }
+            }],
+            xAxes: [{ 
+              scaleLabel: {
+                display: true,
+                labelString: "GDP (PPP)"
+              }
+            }]
+          }
+        }
+    });
+
+</script>
+</body>
+</html>

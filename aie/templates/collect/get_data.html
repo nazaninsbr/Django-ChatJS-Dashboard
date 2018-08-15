@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Get Data</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+    <link href="https://cdn.bootcss.com/material-design-icons/3.0.1/iconfont/material-icons.css" rel="stylesheet">
+    <style>
+    	body{
+    		background-color: #1d3459;
+    	}
+    	.row-1 {
+    		margin-bottom: 30%;
+    	}
+
+    	.input-field input{
+		     color: white;
+		}
+
+    	.input-field input:focus {
+		     color: white;
+		}
+    </style>
+</head>
+<body style="">
+	<div class="container">
+		<div class="row row-1"></div>
+		<div class="row">
+			<form method="POST">
+				{% csrf_token %}
+				<div class="input-field col s12">
+			      	<input value="" id="id" type="text" name="id" class="validate">
+			      	<label class="active" for="id">User id</label>
+			    </div>
+			    <div class="input-field col s12">
+			      	<input value="" id="value" type="text" name="value" class="validate">
+			      	<label class="active" for="value">Value</label>
+			     	<button class="btn waves-effect waves-light" type="submit" name="action">Submit
+					    <i class="material-icons right">send</i>
+					</button>
+			    </div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>
