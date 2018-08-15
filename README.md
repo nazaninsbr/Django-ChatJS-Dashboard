@@ -13,7 +13,7 @@
 2 of the most important URLs (you can navigate through the rest using the menu):
 ```bash 
 http://127.0.0.1:8000/ -> login page
-http://127.0.0.1:8000/collect/ -> were you could input the data that will be displayed in the charts
+http://127.0.0.1:8000/collect/ -> where you could input the data that will be displayed in the charts
 ```
 
 <h3 id="result">what it looks like</h3>
